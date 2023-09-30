@@ -6,6 +6,8 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -41,13 +43,11 @@ public class EmployeeController {
 		theModel.addAttribute("employee", theEmployee);
 		return "employees/employee-form";
 	}
+
+	@PostMapping("/save")
+	public String saveEmployee(@ModelAttribute("employee") Employee theEmployee) {
+		employeeService.save(theEmployee);
+
+		return "redirect:/employees/list";
+	}
 }
-
-
-
-
-
-
-
-
-
